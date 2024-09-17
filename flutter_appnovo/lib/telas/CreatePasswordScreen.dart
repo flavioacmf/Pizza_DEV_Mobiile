@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'AddressScreen.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
   @override
@@ -74,7 +75,13 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Ação para o botão Concluir
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            AddressScreen(), // Vai para AddressScreen
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,

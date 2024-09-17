@@ -74,13 +74,39 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
       backgroundColor: Color(0xFFFFF1F0),
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('Etapa 2/3'),
+        leading: Padding(
+          padding: const EdgeInsets.only(
+              top: 60.0), // Ajuste esse valor para mover a seta para baixo
+          child: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color:
+                  const Color.fromARGB(255, 0, 0, 0), // Ícone de seta de voltar
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+                height:
+                    20), // Espaçamento logo abaixo da faixa vermelha para descer a seta
+            Text(
+              'Etapa 2/3',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 10),
             Image.asset(
               'lib/assets/location_icon.png', // Ícone da localização
               height: 200,
@@ -91,6 +117,7 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
+                color: Colors.black, // Texto em preto
               ),
               textAlign: TextAlign.center,
             ),
@@ -103,11 +130,13 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 60),
+            Spacer(), // Espaçamento flexível para manter o botão no final da tela
             ElevatedButton(
-              onPressed: _obterPermissaoLocalizacao, // Chama a função ao clicar no botão
+              onPressed:
+                  _obterPermissaoLocalizacao, // Chama a função ao clicar no botão
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
+                backgroundColor:
+                    Colors.red, // Cor de fundo do botão em vermelho
                 padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -115,7 +144,8 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
               ),
               child: Text(
                 'Continuar',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                    fontSize: 18, color: Colors.white), // Texto em branco
               ),
             ),
             SizedBox(height: 20),
@@ -125,10 +155,10 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.black),
             ),
+            SizedBox(height: 30), // Espaçamento final
           ],
         ),
       ),
     );
   }
 }
-

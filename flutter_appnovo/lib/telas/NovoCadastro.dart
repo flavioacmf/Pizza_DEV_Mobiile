@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'CpfScreen.dart';
 
 class NovoCadastro extends StatelessWidget {
   // Controladores para os campos de texto com máscara
@@ -96,6 +97,12 @@ class NovoCadastro extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Ação para continuar o cadastro
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                CpfScreen()), // Vai para CpfScreen
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,

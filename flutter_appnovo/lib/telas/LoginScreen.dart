@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'NovoCadastro.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -72,7 +73,11 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                // Ação para redirecionar para a tela de cadastro
+                // Navegar para a tela NovoCadastro
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NovoCadastro()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,

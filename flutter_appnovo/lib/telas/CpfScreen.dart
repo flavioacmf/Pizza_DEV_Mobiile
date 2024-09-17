@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart'; // Para aplicar a máscara no CPF
+import 'CreatePasswordScreen.dart';
 
 class CpfScreen extends StatelessWidget {
   final cpfController = MaskedTextController(mask: '000.000.000-00');
@@ -54,7 +55,13 @@ class CpfScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Ação para o botão Continuar
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            CreatePasswordScreen(), // Vai para CpfScreen
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,

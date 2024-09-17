@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'LoginScreen.dart';
 
 class AddressScreen extends StatefulWidget {
   @override
@@ -80,7 +81,13 @@ class _AddressScreenState extends State<AddressScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Ação para salvar endereço
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            LoginScreen(), // Vai para LoginScreen
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,

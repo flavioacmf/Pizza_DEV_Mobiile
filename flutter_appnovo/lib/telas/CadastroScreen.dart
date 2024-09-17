@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appnovo/telas/NovoCadastro.dart';
+import 'LoginScreen.dart';
 
 class CadastroScreen extends StatelessWidget {
   @override
@@ -72,7 +73,12 @@ class CadastroScreen extends StatelessWidget {
             // Botão "Já possui conta? Entrar"
             OutlinedButton(
               onPressed: () {
-                // Navegar para a página de login
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginScreen(), // Vai para LoginScreen
+                  ),
+                );
               },
               style: OutlinedButton.styleFrom(
                 side: BorderSide(color: Colors.black),
