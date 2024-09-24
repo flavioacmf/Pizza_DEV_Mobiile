@@ -29,7 +29,7 @@ class CadastroScreen extends StatelessWidget {
             Icon(
               Icons.check_circle_outline,
               color: Colors.red,
-              size: 100,
+              size: 150,
             ),
             // Texto de confirmação
             Text(
@@ -59,7 +59,7 @@ class CadastroScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.black, // Mantém o fundo preto
                 padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -67,7 +67,10 @@ class CadastroScreen extends StatelessWidget {
               ),
               child: Text(
                 'Novo por aqui? Cadastre-se',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white, // Altera a cor do texto para branco
+                ),
               ),
             ),
             // Botão "Já possui conta? Entrar"
