@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appnovo/telas/NovoCadastro.dart';
 import 'LoginScreen.dart';
+import 'MenuScreen.dart';
 
 class CadastroScreen extends StatelessWidget {
   @override
@@ -99,6 +100,12 @@ class CadastroScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 // Ação para continuar sem cadastro
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MenuScreen(), // Vai para MenuScreen
+                  ),
+                );
               },
               child: Text(
                 'Continuar sem cadastro',

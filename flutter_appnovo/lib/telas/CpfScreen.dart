@@ -8,70 +8,136 @@ class CpfScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFFFF1F0), // Cor de fundo ajustada
       appBar: AppBar(
-        title: Text(
-          "Quase lá, agora precisamos do CPF...",
-          style: TextStyle(color: Colors.red),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        automaticallyImplyLeading: false, // Remove o ícone padrão de voltar
+        backgroundColor:
+            const Color.fromARGB(255, 244, 67, 54), // Barra vermelha
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            TextField(
-              controller: cpfController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: "CPF",
-                border: OutlineInputBorder(),
+            IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context); // Voltar para a tela anterior
+              },
+              color: Colors.white,
+            ),
+            Text(
+              'Etapa 2/3', // Texto da etapa
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
+            ),
+            SizedBox(width: 24), // Espaçamento para alinhar a logo
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 20),
+              // Logo posicionada no canto direito e com tamanho maior
+              Align(
+                alignment: Alignment.centerRight,
+                child: Image.asset(
+                  'lib/assets/pizza_logo.png', // Insira o caminho correto da logo
+                  height: 120, // Tamanho da logo
+                ),
+              ),
+              SizedBox(height: 20),
+              // Título "Quase lá, agora precisamos do CPF..."
+              Text(
+                'Quase lá, agora precisamos do CPF...',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              // Mensagem explicativa
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text:
+                      'Mas fica de boa que essa informação é só pra garantir ',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  children: [
+                    TextSpan(
+                      text: 'mais segurança na hora do pagamento,',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(text: ' tá?'),
+                  ],
+                ),
+              ),
+              SizedBox(height: 40),
+              // Campo CPF
+              TextField(
+                controller: cpfController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: "CPF",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+              ),
+              SizedBox(height: 60), // Espaçamento antes dos botões
+            ],
+          ),
+        ),
+      ),
+      // Botões de cancelar e continuar posicionados no final da tela
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Botão "Cancelar" com fundo igual ao da tela
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context); // Volta para a tela anterior
+              },
+              style: OutlinedButton.styleFrom(
+                backgroundColor:
+                    Color(0xFFFFF1F0), // Fundo igual ao fundo da tela
+                side: BorderSide(color: Colors.black), // Contorno preto
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              child: Text(
+                "Cancelar",
+                style: TextStyle(color: Colors.black), // Texto preto
               ),
             ),
-            SizedBox(height: 20),
-            Text(
-              "Mas fica de boa que essa informação é só pra garantir mais segurança na hora do pagamento, tá?",
-              style: TextStyle(color: Colors.black),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context); // Botão cancelar
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
+            // Botão "Continuar" com fundo vermelho
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CreatePasswordScreen(), // Vai para CreatePasswordScreen
                   ),
-                  child: Text(
-                    "Cancelar",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, // Fundo vermelho
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            CreatePasswordScreen(), // Vai para CpfScreen
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                  ),
-                  child: Text(
-                    "Continuar",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
+              ),
+              child: Text(
+                "Continuar",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
