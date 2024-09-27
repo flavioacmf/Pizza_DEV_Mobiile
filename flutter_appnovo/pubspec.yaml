@@ -32,3 +32,21 @@ flutter:
     - lib/assets/pizza_logo2.png
     - lib/assets/location_icon.png
     - lib/assets/google_icon.png
+    - lib/assets/pizzas/a_moda.png
+    - lib/assets/pizzas/bolodemorango.png
+    - lib/assets/pizzas/calabresa.png
+    - lib/assets/pizzas/chocolatemorango.png
+    - lib/assets/pizzas/docedeleite.png
+    - lib/assets/pizzas/filemignon.png
+    - lib/assets/pizzas/heinekenlongneck.png
+    - lib/assets/pizzas/marguerita.png
+    - lib/assets/pizzas/minicalabresa.png
+    - lib/assets/pizzas/minifrangocatupiry.png
+    - lib/assets/pizzas/miniqueijo.png
+    - lib/assets/pizzas/mozarelabuffala.png
+    - lib/assets/pizzas/pepperoni.png
+    - lib/assets/pizzas/quatroqueijos.png
+    - lib/assets/pizzas/queijobacon.png
+    - lib/assets/pizzas/romeujulieta.png
+    - lib/assets/pizzas/sucodelaranja.png
+    - lib/assets/pizzas/vegetariana.png
