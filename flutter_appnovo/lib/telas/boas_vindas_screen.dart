@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'TelaLocalizacao.dart'; // Certifique-se de que o caminho esteja correto
+import 'tela_localizacao.dart'; // Certifique-se de que o caminho esteja correto
 
 class BoasVindasScreen extends StatelessWidget {
+  const BoasVindasScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFF1F0), // Fundo rosa claro
+      backgroundColor: const Color(0xFFFFF1F0), // Fundo rosa claro
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center, // Centraliza horizontalmente
         children: [
@@ -29,9 +31,9 @@ class BoasVindasScreen extends StatelessWidget {
                       height: 300, // Tamanho da logo
                     ),
                   ),
-                  SizedBox(height: 40), // Espaçamento entre logo e o texto de boas-vindas
+                  const SizedBox(height: 40), // Espaçamento entre logo e o texto de boas-vindas
                   // Texto de boas-vindas
-                  Text(
+                  const Text(
                     'Hey, que bom ter você aqui!',
                     style: TextStyle(
                       fontSize: 24,
@@ -40,9 +42,9 @@ class BoasVindasScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 16), // Espaçamento entre o título e a descrição
+                  const SizedBox(height: 16), // Espaçamento entre o título e a descrição
                   // Descrição
-                  Text(
+                  const Text(
                     'Aqui no app da Pizza Dev, você aproveita nossos produtos e promoções exclusivas pra pedir aquela pizza deliciosa que só a gente tem.',
                     style: TextStyle(
                       fontSize: 16,
@@ -50,25 +52,25 @@ class BoasVindasScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 80), // Espaçamento entre o texto e o botão
+                  const SizedBox(height: 80), // Espaçamento entre o texto e o botão
                   // Botão "Próximo"
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TelaLocalizacao(), // Vai para TelaLocalizacao
+                          builder: (context) => const TelaLocalizacao(), // Vai para TelaLocalizacao
                         ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
-                      padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Próximo',
                       style: TextStyle(
                         fontSize: 25, 

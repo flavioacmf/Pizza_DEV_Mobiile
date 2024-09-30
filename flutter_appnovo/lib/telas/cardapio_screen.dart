@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 class CardapioScreen extends StatefulWidget {
+  const CardapioScreen({super.key});
+
   @override
-  _CardapioScreenState createState() => _CardapioScreenState();
+  CardapioScreenState createState() => CardapioScreenState();
 }
 
-class _CardapioScreenState extends State<CardapioScreen> {
+class CardapioScreenState extends State<CardapioScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Cardápio",
           style: TextStyle(color: Colors.red),
         ),
@@ -23,22 +25,22 @@ class _CardapioScreenState extends State<CardapioScreen> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            buildSection("Pizzas brotinho", [
+            buildSection("Pizzas brotinho", const [
               "Queijo: R\$ 12,99",
               "Calabresa: R\$ 12,99",
               "Frango e catupiry: R\$ 13,99",
             ]),
-            buildSection("Pizzas doces", [
+            buildSection("Pizzas doces", const [
               "Romeu e Julieta: a partir de R\$ 29,99",
             ]),
-            buildSection("Pizzas especiais", [
+            buildSection("Pizzas especiais", const [
               "Frango e catupiry: R\$ 13,99",
             ]),
-            buildSection("Pizzas tradicionais", [
+            buildSection("Pizzas tradicionais", const [
               "Queijo: R\$ 12,99",
               "Calabresa: R\$ 12,99",
             ]),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Ação para mostrar mais itens do cardápio
@@ -46,7 +48,7 @@ class _CardapioScreenState extends State<CardapioScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
               ),
-              child: Text(
+              child: const Text(
                 "Mostrar mais",
                 style: TextStyle(color: Colors.white),
               ),
@@ -63,21 +65,21 @@ class _CardapioScreenState extends State<CardapioScreen> {
       children: [
         Text(
           sectionTitle,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         ...items.map((item) => Text(
               item,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black,
               ),
             )),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }

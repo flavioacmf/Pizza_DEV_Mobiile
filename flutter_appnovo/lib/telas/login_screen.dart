@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'NovoCadastro.dart';
-import 'MenuScreen.dart';
+import 'novo_cadastro.dart';
+import 'menu_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
   bool isPasswordVisible = false; // Controle de visibilidade da senha
@@ -25,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Colors.red,
               height: 40, // Tamanho ajustado da barra vermelha
             ),
-            SizedBox(height: 20), // Espaçamento entre a barra e a logo
+            const SizedBox(height: 20), // Espaçamento entre a barra e a logo
 
             // Logo da aplicação
             Image.asset(
@@ -33,10 +35,10 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 80,
             ),
 
-            SizedBox(height: 10), // Espaçamento entre a logo e o texto
+            const SizedBox(height: 10), // Espaçamento entre a logo e o texto
 
             // Título abaixo da logo
-            Text(
+            const Text(
               "Eai? Seja bem vindo!",
               style: TextStyle(
                 fontSize: 24,
@@ -45,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
                 height: 20), // Espaçamento antes dos campos de email e senha
 
             Padding(
@@ -63,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   // Campo de senha menor com opção de visualizar
                   TextField(
@@ -88,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                       height:
                           5), // Espaçamento menor antes do "Esqueci minha senha"
 
@@ -99,13 +101,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         // Ação de "Esqueci minha senha"
                       },
-                      child: Text(
+                      child: const Text(
                         "Esqueci minha senha",
                         style: TextStyle(color: Colors.red),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // Botão "Entrar no app" reduzido
                   ElevatedButton(
@@ -114,26 +116,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
-                      padding: EdgeInsets.symmetric(vertical: 12), // Reduzido
+                      padding: const EdgeInsets.symmetric(vertical: 12), // Reduzido
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Entrar no app",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
 
                   // Texto pequeno "Ou use outra conta"
-                  Center(
+                  const Center(
                     child: Text(
                       "Ou use outra conta",
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   // Botão "Entrar com o Google" com ícone, reduzido
                   ElevatedButton.icon(
@@ -145,37 +147,37 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 20,
                       width: 20,
                     ),
-                    label: Text("Entrar com o Google"),
+                    label: const Text("Entrar com o Google"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      side: BorderSide(color: Colors.grey),
+                      side: const BorderSide(color: Colors.grey),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 12), // Reduzido
+                      padding: const EdgeInsets.symmetric(vertical: 12), // Reduzido
                       foregroundColor: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   // Botão "Iniciar sessão com a Apple" com ícone, reduzido
                   ElevatedButton.icon(
                     onPressed: () {
                       // Ação de entrar com a Apple
                     },
-                    icon: Icon(Icons.apple, color: Colors.black),
-                    label: Text("Iniciar sessão com a Apple"),
+                    icon: const Icon(Icons.apple, color: Colors.black),
+                    label: const Text("Iniciar sessão com a Apple"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      side: BorderSide(color: Colors.grey),
+                      side: const BorderSide(color: Colors.grey),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 12), // Reduzido
+                      padding: const EdgeInsets.symmetric(vertical: 12), // Reduzido
                       foregroundColor: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
 
                   // Botão "Novo por aqui? Cadastre-se" reduzido
                   ElevatedButton(
@@ -183,22 +185,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Navegar para a tela de cadastro
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => NovoCadastro()),
+                        MaterialPageRoute(
+                            builder: (context) => NovoCadastro()), // Adiciona const
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.black,
-                      padding: EdgeInsets.symmetric(vertical: 12), // Reduzido
+                      padding: const EdgeInsets.symmetric(vertical: 12), // Reduzido
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Novo por aqui? Cadastre-se",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   // Texto pequeno "Continuar sem login"
                   Center(
@@ -209,11 +212,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                MenuScreen(), // Vai para MenuScreen
+                                const MenuScreen(), // Adiciona const
                           ),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "Continuar sem login",
                         style: TextStyle(color: Colors.grey, fontSize: 12),
                       ),

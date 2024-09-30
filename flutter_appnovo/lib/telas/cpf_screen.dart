@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart'; // Para aplicar a máscara no CPF
-import 'CreatePasswordScreen.dart';
+import 'create_password_screen.dart';
 
 class CpfScreen extends StatelessWidget {
   final cpfController = MaskedTextController(mask: '000.000.000-00');
 
+  CpfScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFF1F0), // Cor de fundo ajustada
+      backgroundColor: const Color(0xFFFFF1F0), // Cor de fundo ajustada
       appBar: AppBar(
         automaticallyImplyLeading: false, // Remove o ícone padrão de voltar
         backgroundColor:
@@ -17,17 +19,17 @@ class CpfScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context); // Voltar para a tela anterior
               },
               color: Colors.white,
             ),
-            Text(
+            const Text(
               'Etapa 2/3', // Texto da etapa
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
-            SizedBox(width: 24), // Espaçamento para alinhar a logo
+            const SizedBox(width: 24), // Espaçamento para alinhar a logo
           ],
         ),
       ),
@@ -37,7 +39,7 @@ class CpfScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Logo posicionada no canto direito e com tamanho maior
               Align(
                 alignment: Alignment.centerRight,
@@ -46,9 +48,9 @@ class CpfScreen extends StatelessWidget {
                   height: 120, // Tamanho da logo
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Título "Quase lá, agora precisamos do CPF..."
-              Text(
+              const Text(
                 'Quase lá, agora precisamos do CPF...',
                 style: TextStyle(
                   fontSize: 24,
@@ -57,11 +59,11 @@ class CpfScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Mensagem explicativa
               RichText(
                 textAlign: TextAlign.center,
-                text: TextSpan(
+                text: const TextSpan(
                   text:
                       'Mas fica de boa que essa informação é só pra garantir ',
                   style: TextStyle(fontSize: 16, color: Colors.black),
@@ -74,7 +76,7 @@ class CpfScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               // Campo CPF
               TextField(
                 controller: cpfController,
@@ -86,7 +88,7 @@ class CpfScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 60), // Espaçamento antes dos botões
+              const SizedBox(height: 60), // Espaçamento antes dos botões
             ],
           ),
         ),
@@ -104,14 +106,14 @@ class CpfScreen extends StatelessWidget {
               },
               style: OutlinedButton.styleFrom(
                 backgroundColor:
-                    Color(0xFFFFF1F0), // Fundo igual ao fundo da tela
-                side: BorderSide(color: Colors.black), // Contorno preto
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    const Color(0xFFFFF1F0), // Fundo igual ao fundo da tela
+                side: const BorderSide(color: Colors.black), // Contorno preto
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 "Cancelar",
                 style: TextStyle(color: Colors.black), // Texto preto
               ),
@@ -122,19 +124,18 @@ class CpfScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        CreatePasswordScreen(), // Vai para CreatePasswordScreen
+                    builder: (context) => const CreatePasswordScreen(), // Adiciona const
                   ),
                 );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red, // Fundo vermelho
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 "Continuar",
                 style: TextStyle(color: Colors.white),
               ),

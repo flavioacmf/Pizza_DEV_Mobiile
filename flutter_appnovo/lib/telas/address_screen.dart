@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'LoginScreen.dart'; // Importando a tela de login
+import 'login_screen.dart'; // Importando a tela de login
 
 class AddressScreen extends StatefulWidget {
   final ScrollController scrollController; // Adiciona um controlador de rolagem
 
-  AddressScreen({required this.scrollController}); // Construtor atualizado
+  const AddressScreen({super.key, required this.scrollController}); // Construtor atualizado
 
   @override
-  _AddressScreenState createState() => _AddressScreenState();
+  AddressScreenState createState() => AddressScreenState();
 }
 
-class _AddressScreenState extends State<AddressScreen> {
+class AddressScreenState extends State<AddressScreen> {
   final TextEditingController logradouroController = TextEditingController();
   final TextEditingController bairroController = TextEditingController();
   final TextEditingController cepController = TextEditingController();
@@ -27,36 +27,36 @@ class _AddressScreenState extends State<AddressScreen> {
           children: [
             TextField(
               controller: logradouroController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Logradouro",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: bairroController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Bairro",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: cidadeController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Cidade",
                       border: OutlineInputBorder(),
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: TextField(
                     controller: estadoController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Estado",
                       border: OutlineInputBorder(),
                     ),
@@ -64,41 +64,41 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: cepController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "CEP",
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               "Como deseja favoritar esse endereço?",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 IconButton(
-                  icon: Icon(Icons.home),
+                  icon: const Icon(Icons.home),
                   onPressed: () {},
                   tooltip: "Casa",
                 ),
                 IconButton(
-                  icon: Icon(Icons.work),
+                  icon: const Icon(Icons.work),
                   onPressed: () {},
                   tooltip: "Trabalho",
                 ),
                 IconButton(
-                  icon: Icon(Icons.star),
+                  icon: const Icon(Icons.star),
                   onPressed: () {},
                   tooltip: "Outros",
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -108,24 +108,24 @@ class _AddressScreenState extends State<AddressScreen> {
                   },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.black,
-                    side: BorderSide(color: Colors.black),
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    side: const BorderSide(color: Colors.black),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                   ),
-                  child: Text("Cancelar"),
+                  child: const Text("Cancelar"),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Ao clicar em "Salvar endereço", navegar para a tela de login
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      MaterialPageRoute(builder: (context) => const LoginScreen()), // Adiciona const
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Salvar endereço",
                     style: TextStyle(color: Colors.white),
                   ),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'SolicitarLocalizacao.dart'; // Certifique-se de importar corretamente a tela SolicitarLocalizacao
+import 'solicitar_localizacao.dart'; // Certifique-se de importar corretamente a tela SolicitarLocalizacao
 
 class CreatePasswordScreen extends StatefulWidget {
+  const CreatePasswordScreen({super.key});
+
   @override
-  _CreatePasswordScreenState createState() => _CreatePasswordScreenState();
+  CreatePasswordScreenState createState() => CreatePasswordScreenState();
 }
 
-class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
+class CreatePasswordScreenState extends State<CreatePasswordScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -19,7 +21,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(25.0),
         ),
@@ -30,7 +32,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
         minChildSize: 0.5,
         maxChildSize: 0.9,
         builder: (_, controller) =>
-            SolicitarLocalizacao(), // Chama a tela SolicitarLocalizacao
+            const SolicitarLocalizacao(), // Chama a tela SolicitarLocalizacao
       ),
     );
   }
@@ -38,7 +40,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFF1F0),
+      backgroundColor: const Color(0xFFFFF1F0),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 244, 67, 54),
@@ -46,17 +48,17 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },
               color: Colors.white,
             ),
-            Text(
+            const Text(
               'Cadastre-se 3/3',
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
-            SizedBox(width: 24),
+            const SizedBox(width: 24),
           ],
         ),
       ),
@@ -66,7 +68,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Align(
                 alignment: Alignment.centerRight,
                 child: Image.asset(
@@ -74,8 +76,8 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   height: 100,
                 ),
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 'Sua Pizza Dev está cada vez mais perto: crie sua senha!',
                 style: TextStyle(
                   fontSize: 24,
@@ -84,7 +86,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
                 controller: passwordController,
                 obscureText: !isPasswordVisible,
@@ -107,17 +109,17 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Senha com pelo menos 8 caracteres, contendo:',
                 style: TextStyle(
-                    fontSize: 16, color: const Color.fromARGB(255, 0, 0, 0)),
+                    fontSize: 16, color: Color.fromARGB(255, 0, 0, 0)),
                 textAlign: TextAlign.left,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               RichText(
                 textAlign: TextAlign.left,
-                text: TextSpan(
+                text: const TextSpan(
                   style: TextStyle(fontSize: 16, color: Colors.red),
                   children: [
                     TextSpan(text: '• Mínimo 8 caracteres\n'),
@@ -128,7 +130,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: confirmPasswordController,
                 obscureText: !isConfirmPasswordVisible,
@@ -151,7 +153,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Checkbox(
@@ -162,7 +164,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       });
                     },
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Text(
                       "Aceito receber informações, incluindo ofertas especiais, cupons e novidades.",
                       style: TextStyle(color: Colors.black),
@@ -170,7 +172,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -179,15 +181,15 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                       Navigator.pop(context);
                     },
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: Color(0xFFFFF1F0),
-                      side: BorderSide(color: Colors.black),
+                      backgroundColor: const Color(0xFFFFF1F0),
+                      side: const BorderSide(color: Colors.black),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Cancelar",
                       style: TextStyle(color: Colors.black),
                     ),
@@ -200,12 +202,12 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                          const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Concluir",
                       style: TextStyle(color: Colors.white),
                     ),

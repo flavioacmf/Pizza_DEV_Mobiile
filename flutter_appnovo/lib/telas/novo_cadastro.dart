@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-import 'CpfScreen.dart';
+import 'cpf_screen.dart';
 
 class NovoCadastro extends StatelessWidget {
   // Controladores para os campos de texto com máscara
   final _dataController = MaskedTextController(mask: '00/00/0000');
   final _telefoneController = MaskedTextController(mask: '(00) 00000-0000');
 
+  NovoCadastro({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFF1F0), // Cor de fundo ajustada
+      backgroundColor: const Color(0xFFFFF1F0), // Cor de fundo ajustada
       appBar: AppBar(
         automaticallyImplyLeading: false, // Remove o ícone padrão de voltar
         backgroundColor: const Color.fromARGB(255, 244, 67, 54),
@@ -19,19 +21,19 @@ class NovoCadastro extends StatelessWidget {
           children: [
             // Ícone de voltar (seta)
             IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context); // Volta para a tela anterior
               },
               color: Colors.white,
             ),
             // Texto 'Cadastre-se 1/3'
-            Text(
+            const Text(
               'Cadastre-se 1/3',
               style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
             // Espaço vazio para alinhar a logo fora da barra
-            SizedBox(width: 24),
+            const SizedBox(width: 24),
           ],
         ),
       ),
@@ -41,7 +43,7 @@ class NovoCadastro extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Logo fora da AppBar, no canto direito e com tamanho maior
               Align(
                 alignment: Alignment.centerRight,
@@ -50,9 +52,9 @@ class NovoCadastro extends StatelessWidget {
                   height: 120, // Aumenta o tamanho da logo
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Título 'Beleza, vamos começar!'
-              Text(
+              const Text(
                 'Beleza, vamos começar!',
                 style: TextStyle(
                   fontSize: 24,
@@ -61,7 +63,7 @@ class NovoCadastro extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Campo Nome e Sobrenome
               TextField(
                 decoration: InputDecoration(
@@ -71,7 +73,7 @@ class NovoCadastro extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               // Campo Como você quer ser chamado?
               TextField(
                 decoration: InputDecoration(
@@ -81,7 +83,7 @@ class NovoCadastro extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               // Campo Aniversário
               TextField(
                 controller: _dataController,
@@ -93,7 +95,7 @@ class NovoCadastro extends StatelessWidget {
                 ),
                 keyboardType: TextInputType.datetime,
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               // Campo Telefone
               TextField(
                 controller: _telefoneController,
@@ -105,7 +107,7 @@ class NovoCadastro extends StatelessWidget {
                 ),
                 keyboardType: TextInputType.phone,
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               // Campo Email
               TextField(
                 decoration: InputDecoration(
@@ -116,7 +118,7 @@ class NovoCadastro extends StatelessWidget {
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-              SizedBox(height: 32.0),
+              const SizedBox(height: 32.0),
               // Botões
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -127,9 +129,9 @@ class NovoCadastro extends StatelessWidget {
                       Navigator.pop(context); // Volta para a tela anterior
                     },
                     style: OutlinedButton.styleFrom(
-                      backgroundColor: Color(0xFFFFF1F0), // Cor igual ao fundo
-                      side: BorderSide(color: Colors.black), // Contorno preto
-                      padding: EdgeInsets.symmetric(
+                      backgroundColor: const Color(0xFFFFF1F0), // Cor igual ao fundo
+                      side: const BorderSide(color: Colors.black), // Contorno preto
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 30,
                         vertical: 15,
                       ),
@@ -137,7 +139,7 @@ class NovoCadastro extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Cancelar',
                       style: TextStyle(color: Colors.black), // Texto preto
                     ),
@@ -147,12 +149,12 @@ class NovoCadastro extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CpfScreen()),
+                        MaterialPageRoute(builder: (context) => CpfScreen()), // Adiciona const
                       );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red, // Fundo vermelho
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 30,
                         vertical: 15,
                       ),
@@ -160,7 +162,7 @@ class NovoCadastro extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Continuar',
                       style: TextStyle(color: Colors.white),
                     ),

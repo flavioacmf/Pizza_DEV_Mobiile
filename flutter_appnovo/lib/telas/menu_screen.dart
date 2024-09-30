@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatefulWidget {
+  const MenuScreen({super.key});
+
   @override
-  _MenuScreenState createState() => _MenuScreenState();
+  MenuScreenState createState() => MenuScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class MenuScreenState extends State<MenuScreen> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -17,7 +19,7 @@ class _MenuScreenState extends State<MenuScreen> {
         case 1:
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CardapioScreen()),
+            MaterialPageRoute(builder: (context) => const CardapioScreen()),
           );
           break;
         case 2:
@@ -34,7 +36,7 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Menu Inicial',
           style: TextStyle(color: Colors.white),
         ),
@@ -125,7 +127,7 @@ class _MenuScreenState extends State<MenuScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -165,7 +167,7 @@ class _MenuScreenState extends State<MenuScreen> {
             children: [
               Text(
                 category,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -175,12 +177,13 @@ class _MenuScreenState extends State<MenuScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CardapioScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const CardapioScreen()), // Adiciona const
                   );
                 },
                 child: Text(
                   actionText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     color: Colors.blue,
                     decoration: TextDecoration.underline,
@@ -189,9 +192,9 @@ class _MenuScreenState extends State<MenuScreen> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           buildItemList(items), // Usar lista com rolagem horizontal
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
         ],
       ),
     );
@@ -229,7 +232,7 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget buildItemCard(String name, String imagePath, String price) {
     return Container(
       width: 120, // Largura fixa para cada item
-      margin: EdgeInsets.only(right: 10), // Espaçamento entre itens
+      margin: const EdgeInsets.only(right: 10), // Espaçamento entre itens
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -238,7 +241,7 @@ class _MenuScreenState extends State<MenuScreen> {
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -246,19 +249,19 @@ class _MenuScreenState extends State<MenuScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(imagePath, height: 80),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             price,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
               color: Colors.grey,
@@ -275,7 +278,8 @@ class ItemDetailsScreen extends StatelessWidget {
   final String imagePath;
   final String price;
 
-  ItemDetailsScreen({
+  const ItemDetailsScreen({
+    super.key,
     required this.itemName,
     required this.imagePath,
     required this.price,
@@ -291,17 +295,17 @@ class ItemDetailsScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Image.asset(imagePath, height: 200),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             itemName,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             price,
-            style: TextStyle(fontSize: 20, color: Colors.grey),
+            style: const TextStyle(fontSize: 20, color: Colors.grey),
           ),
         ],
       ),
@@ -310,11 +314,13 @@ class ItemDetailsScreen extends StatelessWidget {
 }
 
 class CardapioScreen extends StatelessWidget {
+  const CardapioScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Cardápio',
           style: TextStyle(color: Colors.red),
         ),
@@ -322,7 +328,7 @@ class CardapioScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text('Conteúdo do Cardápio'),
       ),
     );

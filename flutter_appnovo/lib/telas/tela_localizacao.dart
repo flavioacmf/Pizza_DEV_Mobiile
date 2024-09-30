@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_appnovo/telas/CadastroScreen.dart';
+import 'package:flutter_appnovo/telas/cadastro_screen.dart';
 import 'package:geolocator/geolocator.dart';
 
 class TelaLocalizacao extends StatefulWidget {
+  const TelaLocalizacao({super.key});
+
   @override
-  _TelaLocalizacaoState createState() => _TelaLocalizacaoState();
+  TelaLocalizacaoState createState() => TelaLocalizacaoState();
 }
 
-class _TelaLocalizacaoState extends State<TelaLocalizacao> {
+class TelaLocalizacaoState extends State<TelaLocalizacao> {
   String _localizacao = 'Localização desconhecida';
 
   Future<void> _obterPermissaoLocalizacao() async {
@@ -17,7 +19,6 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
     // Verifica se o serviço de localização está habilitado
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // O serviço de localização não está habilitado
       setState(() {
         _localizacao = 'Serviço de localização desativado';
       });
@@ -30,7 +31,6 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        // Permissão negada
         setState(() {
           _localizacao = 'Permissão de localização negada';
         });
@@ -40,7 +40,6 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      // Permissão permanentemente negada
       setState(() {
         _localizacao = 'Permissão de localização permanentemente negada';
       });
@@ -50,10 +49,13 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
 
     // Se a permissão foi concedida, obtemos a localização
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+      ),
+    );
+
     setState(() {
-      _localizacao =
-          'Localização obtida: Lat ${position.latitude}, Long ${position.longitude}';
+      _localizacao = 'Localização obtida: Lat ${position.latitude}, Long ${position.longitude}';
     });
 
     // Após obter a localização, navega para a tela de cadastro
@@ -64,17 +66,17 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
   void _navegarParaTelaCadastro() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CadastroScreen()),
+      MaterialPageRoute(builder: (context) => const CadastroScreen()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFF1F0),
+      backgroundColor: const Color(0xFFFFF1F0),
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text('Etapa 2/3'),
+        title: const Text('Etapa 2/3'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -85,8 +87,8 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
               'lib/assets/location_icon.png', // Ícone da localização
               height: 200,
             ),
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               'Agora, deixa a gente acessar sua localização?',
               style: TextStyle(
                 fontSize: 22,
@@ -94,8 +96,8 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'É que, sabendo qual a sua região, conseguimos oferecer os melhores preços e promoções para você curtir sua pizza em casa.',
               style: TextStyle(
                 fontSize: 16,
@@ -103,28 +105,27 @@ class _TelaLocalizacaoState extends State<TelaLocalizacao> {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             ElevatedButton(
-              onPressed:
-                  _obterPermissaoLocalizacao, // Chama a função ao clicar no botão
+              onPressed: _obterPermissaoLocalizacao, // Chama a função ao clicar no botão
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Continuar',
                 style: TextStyle(fontSize: 18),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Exibe a localização ou a mensagem de erro
             Text(
               _localizacao,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ],
         ),

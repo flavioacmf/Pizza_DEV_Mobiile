@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_appnovo/telas/BoasVindasScreen.dart'; // Importa a tela de boas-vindas
+import 'package:flutter_appnovo/telas/boas_vindas_screen.dart'; // Importa a tela de boas-vindas
 
 void main() {
-  runApp(PizzaDevApp());
+  runApp(const PizzaDevApp());
 }
 
 class PizzaDevApp extends StatelessWidget {
+  const PizzaDevApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: BoasVindasScreen(),
     );
   }

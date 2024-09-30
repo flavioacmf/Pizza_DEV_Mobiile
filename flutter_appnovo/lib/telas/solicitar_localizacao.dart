@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'AddressScreen.dart'; // Importa a AddressScreen
+import 'address_screen.dart'; // Importa a AddressScreen
 
 class SolicitarLocalizacao extends StatelessWidget {
+  const SolicitarLocalizacao({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,13 +14,13 @@ class SolicitarLocalizacao extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Icon(
+              const Icon(
                 Icons.location_on,
                 size: 80,
                 color: Colors.red,
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 "Precisamos saber a sua localização",
                 style: TextStyle(
                   fontSize: 20,
@@ -26,13 +28,13 @@ class SolicitarLocalizacao extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 "Sabendo qual é a sua região, conseguimos oferecer os melhores preços e promoções para você curtir sua pizza em casa.",
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
                   // Mostra o modal sobrepondo a tela
@@ -40,7 +42,7 @@ class SolicitarLocalizacao extends StatelessWidget {
                     context: context,
                     isScrollControlled:
                         true, // Para permitir que a altura seja personalizada
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(25.0),
                       ),
@@ -61,9 +63,9 @@ class SolicitarLocalizacao extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 ),
-                child: Text(
+                child: const Text(
                   'Informar endereço',
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
