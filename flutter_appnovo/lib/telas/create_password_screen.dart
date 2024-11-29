@@ -126,28 +126,15 @@ class CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
-              TextField(
+              _buildPasswordField(
                 controller: passwordController,
-                obscureText: !isPasswordVisible,
-                decoration: InputDecoration(
-                  labelText: "Qual será sua senha?",
-                  errorText: errorMessage, // Mostra erro se inválido
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      isPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isPasswordVisible = !isPasswordVisible;
-                      });
-                    },
-                  ),
-                ),
+                labelText: "Qual será sua senha?",
+                isPasswordVisible: isPasswordVisible,
+                onVisibilityToggle: () {
+                  setState(() {
+                    isPasswordVisible = !isPasswordVisible;
+                  });
+                },
               ),
               const SizedBox(height: 20),
               RichText(
@@ -164,27 +151,15 @@ class CreatePasswordScreenState extends State<CreatePasswordScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              TextField(
+              _buildPasswordField(
                 controller: confirmPasswordController,
-                obscureText: !isConfirmPasswordVisible,
-                decoration: InputDecoration(
-                  labelText: "Confirme sua senha",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      isConfirmPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isConfirmPasswordVisible = !isConfirmPasswordVisible;
-                      });
-                    },
-                  ),
-                ),
+                labelText: "Confirme sua senha",
+                isPasswordVisible: isConfirmPasswordVisible,
+                onVisibilityToggle: () {
+                  setState(() {
+                    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+                  });
+                },
               ),
               const SizedBox(height: 20),
               Row(
@@ -248,6 +223,31 @@ class CreatePasswordScreenState extends State<CreatePasswordScreen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPasswordField({
+    required TextEditingController controller,
+    required String labelText,
+    required bool isPasswordVisible,
+    required VoidCallback onVisibilityToggle,
+  }) {
+    return TextField(
+      controller: controller,
+      obscureText: !isPasswordVisible,
+      decoration: InputDecoration(
+        labelText: labelText,
+        errorText: errorMessage,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+          ),
+          onPressed: onVisibilityToggle,
         ),
       ),
     );

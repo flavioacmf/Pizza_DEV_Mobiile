@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_appnovo/telas/novo_cadastro.dart';
+import 'novo_cadastro.dart';
 import 'login_screen.dart';
 import 'menu_screen.dart';
 
@@ -12,7 +12,10 @@ class CadastroScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFFFF1F0),
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: const Text('Etapa 3/3'),
+        title: const Text(
+          'Etapa 3/3',
+          style: TextStyle(color: Colors.white),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -25,8 +28,7 @@ class CadastroScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment:
               MainAxisAlignment.spaceEvenly, // Espaçamento uniforme
-          crossAxisAlignment:
-              CrossAxisAlignment.center, // Centraliza horizontalmente
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Ícone de sucesso
             const Icon(
@@ -40,12 +42,13 @@ class CadastroScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
               textAlign: TextAlign.center,
             ),
             // Texto explicativo
             const Text(
-              'Agora é só fazer seu cadastro. Lembrando que se você ainda não permitiu sua localização, iremos solicitá-la novamente.',
+              'Agora é só fazer seu cadastro. Caso ainda não tenha permitido sua localização, iremos solicitá-la novamente.',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black54,
@@ -55,16 +58,13 @@ class CadastroScreen extends StatelessWidget {
             // Botão "Novo por aqui? Cadastre-se"
             ElevatedButton(
               onPressed: () {
-                // Navegar para a tela NovoCadastro
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const NovoCadastro()), // Remove const
+                  MaterialPageRoute(builder: (context) => const NovoCadastro()),
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black, // Mantém o fundo preto
+                backgroundColor: Colors.black,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
                 shape: RoundedRectangleBorder(
@@ -75,7 +75,7 @@ class CadastroScreen extends StatelessWidget {
                 'Novo por aqui? Cadastre-se',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Colors.white, // Altera a cor do texto para branco
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -84,9 +84,7 @@ class CadastroScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(), // Remove const
-                  ),
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               },
               style: OutlinedButton.styleFrom(
@@ -99,23 +97,27 @@ class CadastroScreen extends StatelessWidget {
               ),
               child: const Text(
                 'Já possui conta? Entrar',
-                style: TextStyle(fontSize: 18, color: Colors.black),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
               ),
             ),
             // Botão "Continuar sem cadastro"
             TextButton(
               onPressed: () {
-                // Ação para continuar sem cadastro
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const MenuScreen(), // Remove const
-                  ),
+                  MaterialPageRoute(builder: (context) => const MenuScreen()),
                 );
               },
               child: const Text(
                 'Continuar sem cadastro',
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
           ],

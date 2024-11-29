@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appnovo/telas/produto.dart';
+import 'menu_screen.dart'; // Certifique-se de importar a classe Produto
 
 class ItemDetailsScreen extends StatefulWidget {
-  final String itemName;
-  final String imagePath;
-  final String price;
-  final String category; // Categoria (pizzas, bebidas, etc.)
+  final Produto produto;
   final List<String>? sizes; // Lista de tamanhos (apenas para bebidas)
 
   const ItemDetailsScreen({
     super.key,
-    required this.itemName,
-    required this.imagePath,
-    required this.price,
-    required this.category,
+    required this.produto,
     this.sizes,
   });
 
@@ -27,7 +23,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    if (widget.category == 'bebidas' &&
+    if (widget.produto.categoria == 'bebidas' &&
         widget.sizes != null &&
         widget.sizes!.isNotEmpty) {
       // Seleciona o primeiro tamanho disponível para bebidas
@@ -52,12 +48,12 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final bool isBeverage =
-        widget.category == 'bebidas'; // Verifica se é bebida
+        widget.produto.categoria == 'bebidas'; // Verifica se é bebida
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text(widget.itemName),
+        title: Text(widget.produto.nome),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -66,13 +62,13 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
           children: [
             Center(
               child: Image.asset(
-                widget.imagePath,
+                widget.produto.imagem,
                 height: 150,
               ),
             ),
             const SizedBox(height: 16),
             Text(
-              widget.itemName,
+              widget.produto.nome,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -127,7 +123,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                   ],
                 ),
                 Text(
-                  'Subtotal: R\$ ${(double.parse(widget.price) * quantity).toStringAsFixed(2)}',
+                  'Subtotal: R\$ ${(widget.produto.preco * quantity).toStringAsFixed(2)}',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

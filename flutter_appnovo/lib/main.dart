@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_appnovo/telas/boas_vindas_screen.dart';
 import 'package:provider/provider.dart';
-import 'telas/perfil_screen.dart'; // Import corrigido
+
+// Importação de Telas
+import 'telas/boas_vindas_screen.dart';
+import 'telas/perfil_screen.dart';
 import 'telas/login_screen.dart';
 import 'telas/menu_screen.dart';
 import 'telas/cardapio_screen.dart';
 import 'telas/cupons_screen.dart';
 import 'telas/pedidos_screen.dart';
-import 'telas/cart_provider.dart';
-// ignore: unused_import
-import 'telas/cart_screen.dart';
+import 'telas/cart_screen.dart'; // Correção do import
+
+// Provider
+import 'telas/cart_provider.dart'; // Ajuste no caminho do CartProvider
 
 void main() {
   runApp(
@@ -29,16 +32,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pizza App',
-      theme: ThemeData(primarySwatch: Colors.red),
-      initialRoute: '/', // Página inicial definida como Menu
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      initialRoute: '/', // Tela inicial definida como BoasVindasScreen
       routes: {
         '/': (context) => const BoasVindasScreen(),
-        '/menu': (context) => const MenuScreen(), // Tela do Menu
-        '/cardapio': (context) => const CardapioScreen(), // Tela do Cardápio
-        '/cupons': (context) => const CuponsScreen(), // Tela de Cupons
-        '/pedidos': (context) => const PedidosScreen(), // Tela de Pedidos
-        '/perfil': (context) => const PerfilScreen(), // Tela de Perfil
-        '/login': (context) => const LoginScreen(), // Tela de Login
+        '/menu': (context) => const MenuScreen(),
+        '/cardapio': (context) => const CardapioScreen(),
+        '/cupons': (context) => CuponsScreen(),
+        '/pedidos': (context) => PedidosScreen(),
+        '/perfil': (context) => const PerfilScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/carrinho': (context) =>
+            const CartScreen(), // Adicionado rota para CartScreen
       },
     );
   }

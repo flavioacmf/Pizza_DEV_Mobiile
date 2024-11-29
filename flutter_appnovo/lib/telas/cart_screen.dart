@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'cart_provider.dart';
+import 'cart_provider.dart'; // Certifique-se de importar o CartProvider corretamente
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Obtém o CartProvider da árvore de widgets
     final cartProvider = Provider.of<CartProvider>(context);
     final cartItems = cartProvider.items.values.toList();
 
@@ -37,8 +38,8 @@ class CartScreen extends StatelessWidget {
                             child: Text('${item.quantity}x'),
                           ),
                           title: Text(item.name),
-                          subtitle:
-                              Text('R\$ ${item.price.toStringAsFixed(2)}'),
+                          subtitle: Text(
+                              'R\$ ${(item.quantity * item.price).toStringAsFixed(2)}'),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: () {

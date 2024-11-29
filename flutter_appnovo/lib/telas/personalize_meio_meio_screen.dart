@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'produto.dart'; // Certifique-se de que a classe Produto está implementada corretamente
 
 class PersonalizeMeioMeioScreen extends StatefulWidget {
-  final String pizzaName;
-  final String pizzaImage;
+  final Produto pizza;
 
   const PersonalizeMeioMeioScreen({
     super.key,
-    required this.pizzaName,
-    required this.pizzaImage,
+    required this.pizza,
   });
 
   @override
@@ -17,31 +16,43 @@ class PersonalizeMeioMeioScreen extends StatefulWidget {
 
 class _PersonalizeMeioMeioScreenState extends State<PersonalizeMeioMeioScreen> {
   int quantity = 1; // Quantidade de pizzas
-  String? selectedFlavor1; // Primeiro sabor
-  String? selectedFlavor2; // Segundo sabor
-  double flavor1Price = 0.0; // Preço do primeiro sabor
-  double flavor2Price = 0.0; // Preço do segundo sabor
+  Produto? selectedFlavor1; // Primeiro sabor
+  Produto? selectedFlavor2; // Segundo sabor
 
   // Preço total baseado na quantidade e sabores escolhidos
-  double get subtotal => quantity * ((flavor1Price + flavor2Price) / 2);
+  double get subtotal =>
+      quantity *
+      (((selectedFlavor1?.preco ?? 0) + (selectedFlavor2?.preco ?? 0)) / 2);
 
   // Lista de sabores disponíveis
-  final List<Map<String, dynamic>> flavors = [
-    {
-      'name': '1/2 Calabresa e Requeijão',
-      'price': 37.99,
-      'image': 'lib/assets/pizzas/calabresa.png'
-    },
-    {
-      'name': '1/2 Napolitana',
-      'price': 39.99,
-      'image': 'lib/assets/pizzas/napolitana.png'
-    },
-    {
-      'name': '1/2 Pepperoni e Requeijão',
-      'price': 41.99,
-      'image': 'lib/assets/pizzas/pepperoni.png'
-    },
+  final List<Produto> flavors = [
+    Produto(
+      id: '1',
+      nome: '1/2 Calabresa e Requeijão',
+      preco: 37.99,
+      imagem: 'lib/assets/pizzas/calabresa.png',
+      categoria: 'Meio a Meio',
+      tamanho: 'Médio',
+      quantidade: 1,
+    ),
+    Produto(
+      id: '2',
+      nome: '1/2 Napolitana',
+      preco: 39.99,
+      imagem: 'lib/assets/pizzas/napolitana.png',
+      categoria: 'Meio a Meio',
+      tamanho: 'Médio',
+      quantidade: 1,
+    ),
+    Produto(
+      id: '3',
+      nome: '1/2 Pepperoni e Requeijão',
+      preco: 41.99,
+      imagem: 'lib/assets/pizzas/pepperoni.png',
+      categoria: 'Meio a Meio',
+      tamanho: 'Médio',
+      quantidade: 1,
+    ),
   ];
 
   @override
@@ -49,7 +60,7 @@ class _PersonalizeMeioMeioScreenState extends State<PersonalizeMeioMeioScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: Text(widget.pizzaName),
+        title: Text(widget.pizza.nome),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,7 +70,7 @@ class _PersonalizeMeioMeioScreenState extends State<PersonalizeMeioMeioScreen> {
             // Imagem da pizza
             Center(
               child: Image.asset(
-                widget.pizzaImage,
+                widget.pizza.imagem,
                 height: 200,
               ),
             ),
@@ -68,7 +79,7 @@ class _PersonalizeMeioMeioScreenState extends State<PersonalizeMeioMeioScreen> {
             // Nome da pizza
             Center(
               child: Text(
-                widget.pizzaName,
+                widget.pizza.nome,
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -83,21 +94,19 @@ class _PersonalizeMeioMeioScreenState extends State<PersonalizeMeioMeioScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            DropdownButtonFormField<String>(
+            DropdownButtonFormField<Produto>(
               value: selectedFlavor1,
               hint: const Text("Selecione o primeiro sabor"),
               items: flavors.map((flavor) {
-                return DropdownMenuItem<String>(
-                  value: flavor['name'],
+                return DropdownMenuItem<Produto>(
+                  value: flavor,
                   child: Text(
-                      "${flavor['name']} - R\$ ${flavor['price'].toStringAsFixed(2)}"),
+                      "${flavor.nome} - R\$ ${flavor.preco.toStringAsFixed(2)}"),
                 );
               }).toList(),
               onChanged: (value) {
                 setState(() {
                   selectedFlavor1 = value;
-                  flavor1Price = flavors
-                      .firstWhere((flavor) => flavor['name'] == value)['price'];
                 });
               },
             ),
@@ -109,21 +118,19 @@ class _PersonalizeMeioMeioScreenState extends State<PersonalizeMeioMeioScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            DropdownButtonFormField<String>(
+            DropdownButtonFormField<Produto>(
               value: selectedFlavor2,
               hint: const Text("Selecione o segundo sabor"),
               items: flavors.map((flavor) {
-                return DropdownMenuItem<String>(
-                  value: flavor['name'],
+                return DropdownMenuItem<Produto>(
+                  value: flavor,
                   child: Text(
-                      "${flavor['name']} - R\$ ${flavor['price'].toStringAsFixed(2)}"),
+                      "${flavor.nome} - R\$ ${flavor.preco.toStringAsFixed(2)}"),
                 );
               }).toList(),
               onChanged: (value) {
                 setState(() {
                   selectedFlavor2 = value;
-                  flavor2Price = flavors
-                      .firstWhere((flavor) => flavor['name'] == value)['price'];
                 });
               },
             ),
@@ -199,7 +206,7 @@ class _PersonalizeMeioMeioScreenState extends State<PersonalizeMeioMeioScreen> {
                         return AlertDialog(
                           title: const Text("Pizza Adicionada"),
                           content: Text(
-                              "Você adicionou $quantity ${widget.pizzaName} meio a meio ao carrinho."),
+                              "Você adicionou $quantity ${widget.pizza.nome} meio a meio ao carrinho."),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context),

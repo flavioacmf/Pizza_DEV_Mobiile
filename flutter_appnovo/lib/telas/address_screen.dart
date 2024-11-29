@@ -32,9 +32,16 @@ class AddressScreenState extends State<AddressScreen> {
       });
       return false;
     }
-    if (cepController.text.length != 8) {
+    if (cepController.text.length != 8 ||
+        !RegExp(r'^\d{8}$').hasMatch(cepController.text)) {
       setState(() {
-        errorMessage = 'Insira um CEP válido (8 dígitos).';
+        errorMessage = 'Insira um CEP válido (8 dígitos numéricos).';
+      });
+      return false;
+    }
+    if (categoriaSelecionada == null) {
+      setState(() {
+        errorMessage = 'Selecione uma categoria para o endereço.';
       });
       return false;
     }
@@ -46,134 +53,146 @@ class AddressScreenState extends State<AddressScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        controller: widget.scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: logradouroController,
-              decoration: const InputDecoration(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: const Text(
+          "Adicionar Endereço",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          controller: widget.scrollController,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildTextField(
+                controller: logradouroController,
                 labelText: "Logradouro",
                 hintText: "Ex.: Rua das Flores",
-                border: OutlineInputBorder(),
               ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: bairroController,
-              decoration: const InputDecoration(
+              const SizedBox(height: 10),
+              _buildTextField(
+                controller: bairroController,
                 labelText: "Bairro",
                 hintText: "Ex.: Centro",
-                border: OutlineInputBorder(),
               ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: cidadeController,
-                    decoration: const InputDecoration(
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildTextField(
+                      controller: cidadeController,
                       labelText: "Cidade",
                       hintText: "Ex.: São Paulo",
-                      border: OutlineInputBorder(),
                     ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: TextField(
-                    controller: estadoController,
-                    decoration: const InputDecoration(
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: _buildTextField(
+                      controller: estadoController,
                       labelText: "Estado",
                       hintText: "Ex.: SP",
-                      border: OutlineInputBorder(),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: cepController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
+                ],
+              ),
+              const SizedBox(height: 10),
+              _buildTextField(
+                controller: cepController,
                 labelText: "CEP",
                 hintText: "Ex.: 12345678",
-                border: OutlineInputBorder(),
+                keyboardType: TextInputType.number,
               ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              "Como deseja favoritar esse endereço?",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildCategoriaButton('Casa', Icons.home),
-                _buildCategoriaButton('Trabalho', Icons.work),
-                _buildCategoriaButton('Outros', Icons.star),
-              ],
-            ),
-            if (errorMessage != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Text(
-                  errorMessage!,
-                  style: const TextStyle(color: Colors.red),
-                ),
+              const SizedBox(height: 20),
+              const Text(
+                "Como deseja favoritar esse endereço?",
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OutlinedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    side: const BorderSide(color: Colors.black),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 15),
-                  ),
-                  child: const Text("Cancelar"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_validarCampos()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Endereço salvo com sucesso!'),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginScreen()),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 15),
-                  ),
-                  child: const Text(
-                    "Salvar endereço",
-                    style: TextStyle(color: Colors.white),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildCategoriaButton('Casa', Icons.home),
+                  _buildCategoriaButton('Trabalho', Icons.work),
+                  _buildCategoriaButton('Outros', Icons.star),
+                ],
+              ),
+              if (errorMessage != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Text(
+                    errorMessage!,
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
-              ],
-            )
-          ],
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      side: const BorderSide(color: Colors.black),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
+                    ),
+                    child: const Text("Cancelar"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_validarCampos()) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Endereço salvo com sucesso!'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()),
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
+                    ),
+                    child: const Text(
+                      "Salvar endereço",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  // Campo de texto reutilizável
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String labelText,
+    String? hintText,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        labelText: labelText,
+        hintText: hintText,
+        border: const OutlineInputBorder(),
       ),
     );
   }

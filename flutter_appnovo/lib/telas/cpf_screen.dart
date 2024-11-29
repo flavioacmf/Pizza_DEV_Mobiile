@@ -17,7 +17,7 @@ class _CpfScreenState extends State<CpfScreen> {
   bool _validarCpf() {
     final cpf = cpfController.text
         .replaceAll(RegExp(r'[^0-9]'), ''); // Remove pontos e traço
-    if (cpf.length != 11) {
+    if (!_cpfValido(cpf)) {
       setState(() {
         errorMessage = 'CPF inválido. Certifique-se de que está completo.';
       });
@@ -26,6 +26,25 @@ class _CpfScreenState extends State<CpfScreen> {
     setState(() {
       errorMessage = null; // Limpa a mensagem de erro
     });
+    return true;
+  }
+
+  // Validação simples de CPF
+  bool _cpfValido(String cpf) {
+    if (cpf.length != 11) return false;
+    // Lógica básica para evitar CPFs repetidos como 111.111.111-11
+    if (RegExp(r'^(\d)\1*$').hasMatch(cpf)) return false;
+
+    // Cálculo do dígito verificador
+    for (int j = 9; j < 11; j++) {
+      int soma = 0;
+      for (int i = 0; i < j; i++) {
+        soma += int.parse(cpf[i]) * ((j + 1) - i);
+      }
+      int digito = (soma * 10) % 11;
+      if (digito == 10) digito = 0;
+      if (digito != int.parse(cpf[j])) return false;
+    }
     return true;
   }
 
@@ -101,6 +120,7 @@ class _CpfScreenState extends State<CpfScreen> {
                 decoration: InputDecoration(
                   labelText: "CPF",
                   errorText: errorMessage, // Mostra erro caso inválido
+                  prefixIcon: const Icon(Icons.credit_card),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
