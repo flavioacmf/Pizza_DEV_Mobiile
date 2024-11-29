@@ -180,7 +180,8 @@ class _NovoCadastroState extends State<NovoCadastro> {
                       if (_validarCampos()) {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => CpfScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => const CpfScreen()),
                         );
                       }
                     },

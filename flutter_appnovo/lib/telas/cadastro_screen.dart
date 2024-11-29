@@ -59,7 +59,8 @@ class CadastroScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NovoCadastro()), // Remove const
+                      builder: (context) =>
+                          const NovoCadastro()), // Remove const
                 );
               },
               style: ElevatedButton.styleFrom(

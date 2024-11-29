@@ -57,3 +57,6 @@ flutter:
     - lib/assets/pizzas/romeujulieta.png
     - lib/assets/pizzas/sucodelaranja.png
     - lib/assets/pizzas/vegetariana.png
+    - lib/assets/pizzas/coca600.png
+    - lib/assets/pizzas/pizzaMeioAMeio.png
+    - lib/assets/user_profile.png

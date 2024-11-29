@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'ItemDetailsScreen.dart';
+import 'cardapio_screen.dart';
+import 'cupons_screen.dart';
+import 'pedidos_screen.dart';
+import 'perfil_screen.dart';
+import 'item_details_screen.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -15,93 +19,38 @@ class MenuScreenState extends State<MenuScreen> {
     setState(() {
       _selectedIndex = index;
       switch (index) {
-        case 0:
+        case 0: // Menu
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MenuScreen()),
+          );
           break;
-        case 1:
-          Navigator.push(
+        case 1: // Cardápio
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const CardapioScreen()),
           );
           break;
-        case 2:
+        case 2: // Cupons
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const CuponsScreen()),
+          );
           break;
-        case 3:
+        case 3: // Pedidos
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const PedidosScreen()),
+          );
           break;
-        case 4:
+        case 4: // Perfil
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const PerfilScreen()),
+          );
           break;
       }
     });
-  }
-
-  List<String> _getIngredientsForItem(String itemName) {
-    switch (itemName) {
-      case 'Calabresa':
-        return ["Calabresa fatiada", "Queijo mozarela", "Cebola", "Orégano"];
-      case 'Marguerita':
-        return [
-          "Tomate fresco",
-          "Queijo mozarela",
-          "Manjericão",
-          "Azeite de oliva"
-        ];
-      case 'Pepperoni':
-        return ["Pepperoni", "Queijo mozarela", "Molho de tomate", "Orégano"];
-      case 'Quatro Queijos':
-        return [
-          "Queijo mozarela",
-          "Queijo parmesão",
-          "Queijo gorgonzola",
-          "Queijo provolone"
-        ];
-      case 'Vegetariana':
-        return [
-          "Tomate fresco",
-          "Cebola",
-          "Pimentão",
-          "Cogumelos",
-          "Queijo mozarela"
-        ];
-      case 'Filé Mignon':
-        return ["Filé mignon", "Queijo mozarela", "Molho especial", "Orégano"];
-      case 'Mozarela de Búfala':
-        return [
-          "Queijo mozarela de búfala",
-          "Tomate cereja",
-          "Manjericão",
-          "Azeite de oliva"
-        ];
-      case 'Queijo Bacon':
-        return [
-          "Queijo mozarela",
-          "Bacon crocante",
-          "Molho especial",
-          "Orégano"
-        ];
-      case 'Mini Calabresa':
-        return ["Calabresa fatiada", "Queijo mozarela", "Cebola", "Orégano"];
-      case 'Mini Frango Catupiry':
-        return ["Frango desfiado", "Catupiry", "Molho de tomate", "Orégano"];
-      case 'Mini Queijo':
-        return ["Queijo mozarela", "Molho de tomate", "Orégano"];
-      case 'Chocolate com Morango':
-        return ["Chocolate ao leite", "Morangos frescos", "Creme doce"];
-      case 'Romeu e Julieta':
-        return ["Queijo mozarela", "Goiabada cremosa"];
-      case 'Doce de Leite':
-        return ["Doce de leite artesanal", "Queijo mozarela", "Creme doce"];
-      case 'Suco de Laranja':
-        return ["Laranja natural", "Sem adição de açúcar"];
-      case 'Heineken':
-        return ["Cerveja puro malte", "330ml", "Teor alcoólico: 5%"];
-      case 'Bolo de Morango':
-        return [
-          "Massa fofa",
-          "Recheio de creme",
-          "Cobertura de morango fresco"
-        ];
-      default:
-        return ["Descrição não disponível"];
-    }
   }
 
   @override
@@ -119,7 +68,7 @@ class MenuScreenState extends State<MenuScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildCategorySection('Pizzas tradicionais', 'Mostrar Mais', [
+            buildCategorySection('Pizzas Tradicionais', 1, [
               {'name': 'Calabresa', 'image': 'lib/assets/pizzas/calabresa.png'},
               {
                 'name': 'Marguerita',
@@ -135,7 +84,7 @@ class MenuScreenState extends State<MenuScreen> {
                 'image': 'lib/assets/pizzas/vegetariana.png'
               },
             ]),
-            buildCategorySection('Pizzas especiais', 'Mostrar Mais', [
+            buildCategorySection('Pizzas Especiais', 2, [
               {
                 'name': 'Filé Mignon',
                 'image': 'lib/assets/pizzas/filemignon.png'
@@ -149,21 +98,7 @@ class MenuScreenState extends State<MenuScreen> {
                 'image': 'lib/assets/pizzas/queijobacon.png'
               },
             ]),
-            buildCategorySection('Pizza brotinho', 'Mostrar Mais', [
-              {
-                'name': 'Mini Calabresa',
-                'image': 'lib/assets/pizzas/minicalabresa.png'
-              },
-              {
-                'name': 'Mini Frango Catupiry',
-                'image': 'lib/assets/pizzas/minifrangocatupiry.png'
-              },
-              {
-                'name': 'Mini Queijo',
-                'image': 'lib/assets/pizzas/miniqueijo.png'
-              },
-            ]),
-            buildCategorySection('Pizzas doces', 'Mostrar Mais', [
+            buildCategorySection('Pizzas Doces', 3, [
               {
                 'name': 'Chocolate com Morango',
                 'image': 'lib/assets/pizzas/chocolatemorango.png'
@@ -177,17 +112,32 @@ class MenuScreenState extends State<MenuScreen> {
                 'image': 'lib/assets/pizzas/docedeleite.png'
               },
             ]),
-            buildCategorySection('Bebidas', 'Mostrar Mais', [
+            buildCategorySection('Pizza Brotinho', 4, [
+              {
+                'name': 'Mini Calabresa',
+                'image': 'lib/assets/pizzas/minicalabresa.png'
+              },
+              {
+                'name': 'Mini Frango Catupiry',
+                'image': 'lib/assets/pizzas/minifrangocatupiry.png'
+              },
+              {
+                'name': 'Mini Queijo',
+                'image': 'lib/assets/pizzas/miniqueijo.png'
+              },
+            ]),
+            buildCategorySection('Bebidas', 5, [
+              {'name': 'Coca-Cola', 'image': 'lib/assets/pizzas/coca600.png'},
               {
                 'name': 'Suco de Laranja',
                 'image': 'lib/assets/pizzas/sucodelaranja.png'
               },
               {
-                'name': 'Heineken',
+                'name': 'Heineken Long Neck',
                 'image': 'lib/assets/pizzas/heinekenlongneck.png'
               },
             ]),
-            buildCategorySection('Sobremesas', 'Mostrar Mais', [
+            buildCategorySection('Sobremesas', 6, [
               {
                 'name': 'Bolo de Morango',
                 'image': 'lib/assets/pizzas/bolodemorango.png'
@@ -228,7 +178,7 @@ class MenuScreenState extends State<MenuScreen> {
   }
 
   Widget buildCategorySection(
-      String category, String actionText, List<Map<String, String>> items) {
+      String category, int tabIndex, List<Map<String, String>> items) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -250,12 +200,14 @@ class MenuScreenState extends State<MenuScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const CardapioScreen()),
+                      builder: (context) =>
+                          CardapioScreen(initialTabIndex: tabIndex),
+                    ),
                   );
                 },
-                child: Text(
-                  actionText,
-                  style: const TextStyle(
+                child: const Text(
+                  'Mostrar Mais',
+                  style: TextStyle(
                     fontSize: 14,
                     color: Colors.blue,
                     decoration: TextDecoration.underline,
@@ -287,9 +239,9 @@ class MenuScreenState extends State<MenuScreen> {
                   builder: (context) => ItemDetailsScreen(
                     itemName: items[index]['name']!,
                     imagePath: items[index]['image']!,
-                    price: 'R\$ 7,99',
-                    ingredients: _getIngredientsForItem(
-                        items[index]['name']!), // Adicionado
+                    price: 'R\$ 37,99',
+                    ingredients: const ['Exemplo 1', 'Exemplo 2'],
+                    category: 'tradicionais',
                   ),
                 ),
               );
@@ -297,7 +249,7 @@ class MenuScreenState extends State<MenuScreen> {
             child: buildItemCard(
               items[index]['name']!,
               items[index]['image']!,
-              'R\$ 7,99',
+              'R\$ 37,99',
             ),
           );
         },
@@ -344,28 +296,6 @@ class MenuScreenState extends State<MenuScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CardapioScreen extends StatelessWidget {
-  const CardapioScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Cardápio',
-          style: TextStyle(color: Colors.red),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text('Conteúdo do Cardápio'),
       ),
     );
   }

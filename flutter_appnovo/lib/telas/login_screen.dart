@@ -209,7 +209,8 @@ class LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => NovoCadastro()),
+                        MaterialPageRoute(
+                            builder: (context) => const NovoCadastro()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
