@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'item_details_screen.dart';
 import 'menu_screen.dart';
-import 'personalize_meio_meio_screen.dart';
 import 'cupons_screen.dart';
 import 'pedidos_screen.dart';
 import 'perfil_screen.dart';
@@ -25,7 +24,7 @@ class _CardapioScreenState extends State<CardapioScreen>
     _tabController = TabController(
       length: 7,
       vsync: this,
-      initialIndex: widget.initialTabIndex, // Usa o índice inicial fornecido
+      initialIndex: widget.initialTabIndex,
     );
   }
 
@@ -66,30 +65,30 @@ class _CardapioScreenState extends State<CardapioScreen>
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1, // Índice atual da barra
+        currentIndex: 1,
         onTap: (index) {
           switch (index) {
-            case 0: // Home
+            case 0:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const MenuScreen()),
               );
               break;
-            case 1: // Cardápio (já na tela atual)
+            case 1:
               break;
-            case 2: // Cupons
+            case 2:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const CuponsScreen()),
               );
               break;
-            case 3: // Pedidos
+            case 3:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const PedidosScreen()),
               );
               break;
-            case 4: // Perfil
+            case 4:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const PerfilScreen()),
@@ -142,9 +141,11 @@ class _CardapioScreenState extends State<CardapioScreen>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PersonalizeMeioMeioScreen(
-                      pizzaName: item['name']!,
-                      pizzaImage: item['image']!,
+                    builder: (context) => ItemDetailsScreen(
+                      itemName: item['name']!,
+                      imagePath: item['image']!,
+                      price: '37.99',
+                      category: 'pizzas',
                     ),
                   ),
                 );
@@ -163,6 +164,11 @@ class _CardapioScreenState extends State<CardapioScreen>
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
+        final isBeverage = item['category'] == 'bebidas';
+        final sizes = isBeverage
+            ? ['Lata', '600ml', '1L', '2L'] // Tamanhos apenas para bebidas
+            : null;
+
         return Card(
           margin: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
@@ -178,8 +184,8 @@ class _CardapioScreenState extends State<CardapioScreen>
                       itemName: item['name']!,
                       imagePath: item['image']!,
                       price: item['price']!,
-                      ingredients: item['ingredients']!.split(','),
                       category: item['category']!,
+                      sizes: sizes, // Passa tamanhos apenas para bebidas
                     ),
                   ),
                 );
@@ -217,16 +223,14 @@ final _tradicionais = [
     'image': 'lib/assets/pizzas/calabresa.png',
     'description': 'Pizza com calabresa e queijo.',
     'price': '37.99',
-    'ingredients': 'Calabresa,Queijo,Molho de tomate,Orégano',
-    'category': 'tradicionais',
+    'category': 'pizzas',
   },
   {
     'name': 'Marguerita',
     'image': 'lib/assets/pizzas/marguerita.png',
     'description': 'Pizza com manjericão e tomate.',
     'price': '39.99',
-    'ingredients': 'Manjericão,Tomate,Queijo,Molho de tomate',
-    'category': 'tradicionais',
+    'category': 'pizzas',
   },
 ];
 
@@ -236,8 +240,14 @@ final _especiais = [
     'image': 'lib/assets/pizzas/filemignon.png',
     'description': 'Pizza com filé mignon.',
     'price': '59.99',
-    'ingredients': 'Filé mignon,Queijo,Molho especial,Orégano',
-    'category': 'especiais',
+    'category': 'pizzas',
+  },
+  {
+    'name': 'Mozarela de Búfala',
+    'image': 'lib/assets/pizzas/mozarelabuffala.png',
+    'description': 'Pizza com mozarela de búfala e manjericão.',
+    'price': '54.99',
+    'category': 'pizzas',
   },
 ];
 
@@ -245,9 +255,15 @@ final _doces = [
   {
     'name': 'Chocolate com Morango',
     'image': 'lib/assets/pizzas/chocolatemorango.png',
-    'description': 'Pizza doce com morango.',
+    'description': 'Pizza doce com chocolate e morangos frescos.',
     'price': '29.99',
-    'ingredients': 'Chocolate,Morango',
+    'category': 'doces',
+  },
+  {
+    'name': 'Romeu e Julieta',
+    'image': 'lib/assets/pizzas/romeujulieta.png',
+    'description': 'Queijo e goiabada cremosa.',
+    'price': '27.99',
     'category': 'doces',
   },
 ];
@@ -258,18 +274,30 @@ final _brotinho = [
     'image': 'lib/assets/pizzas/minicalabresa.png',
     'description': 'Brotinho com calabresa.',
     'price': '19.99',
-    'ingredients': 'Calabresa,Queijo,Orégano',
+    'category': 'brotinho',
+  },
+  {
+    'name': 'Mini Frango Catupiry',
+    'image': 'lib/assets/pizzas/minifrangocatupiry.png',
+    'description': 'Brotinho com frango e catupiry.',
+    'price': '21.99',
     'category': 'brotinho',
   },
 ];
 
 final _bebidas = [
   {
-    'name': 'Coca-Cola 600ml',
+    'name': 'Coca-Cola',
     'image': 'lib/assets/pizzas/coca600.png',
     'description': 'Bebida gelada.',
     'price': '5.99',
-    'ingredients': 'Coca-Cola',
+    'category': 'bebidas',
+  },
+  {
+    'name': 'Suco de Laranja',
+    'image': 'lib/assets/pizzas/sucodelaranja.png',
+    'description': 'Laranja natural, sem adição de açúcar.',
+    'price': '4.99',
     'category': 'bebidas',
   },
 ];
@@ -278,9 +306,15 @@ final _sobremesas = [
   {
     'name': 'Bolo de Morango',
     'image': 'lib/assets/pizzas/bolodemorango.png',
-    'description': 'Sobremesa deliciosa.',
+    'description': 'Bolo com recheio e cobertura de morangos frescos.',
     'price': '15.99',
-    'ingredients': 'Morango,Creme,Massa fofa',
+    'category': 'sobremesas',
+  },
+  {
+    'name': 'Torta de Limão',
+    'image': 'lib/assets/pizzas/tortadelimao.png',
+    'description': 'Torta doce com creme de limão.',
+    'price': '12.99',
     'category': 'sobremesas',
   },
 ];

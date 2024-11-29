@@ -4,6 +4,7 @@ import 'cupons_screen.dart';
 import 'pedidos_screen.dart';
 import 'perfil_screen.dart';
 import 'item_details_screen.dart';
+import 'carrinho_screen.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -63,84 +64,80 @@ class MenuScreenState extends State<MenuScreen> {
         ),
         backgroundColor: Colors.red,
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CarrinhoScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildCategorySection('Pizzas Tradicionais', 1, [
-              {'name': 'Calabresa', 'image': 'lib/assets/pizzas/calabresa.png'},
+              {
+                'name': 'Calabresa',
+                'image': 'lib/assets/pizzas/calabresa.png',
+                'price': '37.99',
+                'category': 'tradicionais'
+              },
               {
                 'name': 'Marguerita',
-                'image': 'lib/assets/pizzas/marguerita.png'
-              },
-              {'name': 'Pepperoni', 'image': 'lib/assets/pizzas/pepperoni.png'},
-              {
-                'name': 'Quatro Queijos',
-                'image': 'lib/assets/pizzas/quatroqueijos.png'
+                'image': 'lib/assets/pizzas/marguerita.png',
+                'price': '39.99',
+                'category': 'tradicionais'
               },
               {
-                'name': 'Vegetariana',
-                'image': 'lib/assets/pizzas/vegetariana.png'
+                'name': 'Pepperoni',
+                'image': 'lib/assets/pizzas/pepperoni.png',
+                'price': '42.99',
+                'category': 'tradicionais'
               },
             ]),
             buildCategorySection('Pizzas Especiais', 2, [
               {
                 'name': 'Filé Mignon',
-                'image': 'lib/assets/pizzas/filemignon.png'
+                'image': 'lib/assets/pizzas/filemignon.png',
+                'price': '59.99',
+                'category': 'especiais'
               },
               {
                 'name': 'Mozarela de Búfala',
-                'image': 'lib/assets/pizzas/mozarelabuffala.png'
-              },
-              {
-                'name': 'Queijo Bacon',
-                'image': 'lib/assets/pizzas/queijobacon.png'
+                'image': 'lib/assets/pizzas/mozarelabuffala.png',
+                'price': '64.99',
+                'category': 'especiais'
               },
             ]),
             buildCategorySection('Pizzas Doces', 3, [
               {
                 'name': 'Chocolate com Morango',
-                'image': 'lib/assets/pizzas/chocolatemorango.png'
-              },
-              {
-                'name': 'Romeu e Julieta',
-                'image': 'lib/assets/pizzas/romeujulieta.png'
-              },
-              {
-                'name': 'Doce de Leite',
-                'image': 'lib/assets/pizzas/docedeleite.png'
+                'image': 'lib/assets/pizzas/chocolatemorango.png',
+                'price': '29.99',
+                'category': 'doces'
               },
             ]),
-            buildCategorySection('Pizza Brotinho', 4, [
+            buildCategorySection('Bebidas', 4, [
               {
-                'name': 'Mini Calabresa',
-                'image': 'lib/assets/pizzas/minicalabresa.png'
-              },
-              {
-                'name': 'Mini Frango Catupiry',
-                'image': 'lib/assets/pizzas/minifrangocatupiry.png'
-              },
-              {
-                'name': 'Mini Queijo',
-                'image': 'lib/assets/pizzas/miniqueijo.png'
+                'name': 'Coca-Cola',
+                'image': 'lib/assets/pizzas/coca600.png',
+                'price': '5.99',
+                'category': 'bebidas'
               },
             ]),
-            buildCategorySection('Bebidas', 5, [
-              {'name': 'Coca-Cola', 'image': 'lib/assets/pizzas/coca600.png'},
-              {
-                'name': 'Suco de Laranja',
-                'image': 'lib/assets/pizzas/sucodelaranja.png'
-              },
-              {
-                'name': 'Heineken Long Neck',
-                'image': 'lib/assets/pizzas/heinekenlongneck.png'
-              },
-            ]),
-            buildCategorySection('Sobremesas', 6, [
+            buildCategorySection('Sobremesas', 5, [
               {
                 'name': 'Bolo de Morango',
-                'image': 'lib/assets/pizzas/bolodemorango.png'
+                'image': 'lib/assets/pizzas/bolodemorango.png',
+                'price': '15.99',
+                'category': 'sobremesas'
               },
             ]),
           ],
@@ -239,9 +236,8 @@ class MenuScreenState extends State<MenuScreen> {
                   builder: (context) => ItemDetailsScreen(
                     itemName: items[index]['name']!,
                     imagePath: items[index]['image']!,
-                    price: 'R\$ 37,99',
-                    ingredients: const ['Exemplo 1', 'Exemplo 2'],
-                    category: 'tradicionais',
+                    price: items[index]['price']!,
+                    category: items[index]['category']!,
                   ),
                 ),
               );
@@ -249,7 +245,7 @@ class MenuScreenState extends State<MenuScreen> {
             child: buildItemCard(
               items[index]['name']!,
               items[index]['image']!,
-              'R\$ 37,99',
+              'R\$ ${items[index]['price']}',
             ),
           );
         },
