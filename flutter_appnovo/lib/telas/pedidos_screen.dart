@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appnovo/telas/produto.dart';
-import 'menu_screen.dart'; // Importar o modelo Produto
 
 class PedidosScreen extends StatelessWidget {
   PedidosScreen({super.key});

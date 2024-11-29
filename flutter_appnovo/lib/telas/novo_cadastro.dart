@@ -131,8 +131,9 @@ class _NovoCadastroState extends State<NovoCadastro> {
                   icon: Icons.cake,
                   keyboardType: TextInputType.datetime,
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return 'Campo obrigatório.';
+                    }
                     final regex = RegExp(r'^\d{2}/\d{2}/\d{4}$');
                     if (!regex.hasMatch(value)) return 'Data inválida.';
                     return null;
@@ -157,8 +158,9 @@ class _NovoCadastroState extends State<NovoCadastro> {
                   icon: Icons.email,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value == null || value.isEmpty)
+                    if (value == null || value.isEmpty) {
                       return 'Campo obrigatório.';
+                    }
                     if (!value.contains('@')) return 'Email inválido.';
                     return null;
                   },

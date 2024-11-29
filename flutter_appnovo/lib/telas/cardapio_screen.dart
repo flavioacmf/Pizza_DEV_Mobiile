@@ -5,7 +5,6 @@ import 'cupons_screen.dart';
 import 'pedidos_screen.dart';
 import 'perfil_screen.dart';
 import 'produto.dart';
-import 'menu_screen.dart';
 
 class CardapioScreen extends StatefulWidget {
   final int initialTabIndex;

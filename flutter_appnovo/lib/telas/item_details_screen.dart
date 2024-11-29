@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_appnovo/telas/produto.dart';
-import 'menu_screen.dart'; // Certifique-se de importar a classe Produto
+import 'package:provider/provider.dart';
+import 'cart_provider.dart';
+import 'produto.dart';
 
 class ItemDetailsScreen extends StatefulWidget {
   final Produto produto;
-  final List<String>? sizes; // Lista de tamanhos (apenas para bebidas)
+  final List<String>? sizes; // Tamanhos opcionais
 
   const ItemDetailsScreen({
     super.key,
@@ -17,39 +18,19 @@ class ItemDetailsScreen extends StatefulWidget {
 }
 
 class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
-  int quantity = 1;
-  String? selectedSize;
+  String? selectedSize; // Tamanho selecionado (se aplicável)
+  int quantity = 1; // Quantidade padrão
 
   @override
   void initState() {
     super.initState();
-    if (widget.produto.categoria == 'bebidas' &&
-        widget.sizes != null &&
-        widget.sizes!.isNotEmpty) {
-      // Seleciona o primeiro tamanho disponível para bebidas
-      selectedSize = widget.sizes!.first;
-    }
-  }
-
-  void _incrementQuantity() {
-    setState(() {
-      quantity++;
-    });
-  }
-
-  void _decrementQuantity() {
-    if (quantity > 1) {
-      setState(() {
-        quantity--;
-      });
+    if (widget.sizes != null && widget.sizes!.isNotEmpty) {
+      selectedSize = widget.sizes!.first; // Define o tamanho padrão
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool isBeverage =
-        widget.produto.categoria == 'bebidas'; // Verifica se é bebida
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -63,7 +44,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
             Center(
               child: Image.asset(
                 widget.produto.imagem,
-                height: 150,
+                height: 200,
               ),
             ),
             const SizedBox(height: 16),
@@ -74,10 +55,18 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 8),
+            Text(
+              widget.produto.categoria,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
             const SizedBox(height: 16),
-            if (isBeverage &&
-                widget.sizes != null &&
-                widget.sizes!.isNotEmpty) ...[
+
+            // Exibe tamanhos (se aplicável)
+            if (widget.sizes != null && widget.sizes!.isNotEmpty) ...[
               const Text(
                 'Selecione o tamanho:',
                 style: TextStyle(
@@ -101,15 +90,23 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                   );
                 }).toList(),
               ),
+              const SizedBox(height: 16),
             ],
-            const SizedBox(height: 16),
+
+            // Controle de quantidade
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
                     IconButton(
-                      onPressed: _decrementQuantity,
+                      onPressed: () {
+                        if (quantity > 1) {
+                          setState(() {
+                            quantity--;
+                          });
+                        }
+                      },
                       icon: const Icon(Icons.remove),
                     ),
                     Text(
@@ -117,7 +114,11 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                       style: const TextStyle(fontSize: 16),
                     ),
                     IconButton(
-                      onPressed: _incrementQuantity,
+                      onPressed: () {
+                        setState(() {
+                          quantity++;
+                        });
+                      },
                       icon: const Icon(Icons.add),
                     ),
                   ],
@@ -136,7 +137,24 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Ação de adicionar ao carrinho
+                  // Adiciona ao carrinho
+                  final cartProvider =
+                      Provider.of<CartProvider>(context, listen: false);
+
+                  cartProvider.addItem(
+                    widget.produto.id,
+                    widget.produto.nome,
+                    widget.produto.preco,
+                  );
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        '${widget.produto.nome} adicionado ao carrinho!',
+                      ),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 child: const Text('Adicionar ao Carrinho'),

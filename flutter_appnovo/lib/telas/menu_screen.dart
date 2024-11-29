@@ -224,8 +224,9 @@ class MenuScreen extends StatelessWidget {
               itemCount: produtos.length,
               itemBuilder: (context, index) {
                 final produto = produtos[index];
-                return GestureDetector(
-                  onTap: () {
+                return buildProductCard(
+                  produto,
+                  () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -234,11 +235,6 @@ class MenuScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: buildProductCard(
-                    produto.nome,
-                    produto.imagem,
-                    'R\$ ${produto.preco.toStringAsFixed(2)}',
-                  ),
                 );
               },
             ),
@@ -248,46 +244,49 @@ class MenuScreen extends StatelessWidget {
     );
   }
 
-  Widget buildProductCard(String name, String imagePath, String price) {
-    return Container(
-      width: 120,
-      margin: const EdgeInsets.only(right: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(imagePath, height: 80),
-          const SizedBox(height: 8),
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+  Widget buildProductCard(Produto produto, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 120,
+        margin: const EdgeInsets.only(right: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            price,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey,
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(produto.imagem, height: 80),
+            const SizedBox(height: 8),
+            Text(
+              produto.nome,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-        ],
+            const SizedBox(height: 4),
+            Text(
+              'R\$ ${produto.preco.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

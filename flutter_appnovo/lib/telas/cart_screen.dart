@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'cart_provider.dart'; // Certifique-se de importar o CartProvider corretamente
+import 'cart_provider.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Obtém o CartProvider da árvore de widgets
     final cartProvider = Provider.of<CartProvider>(context);
     final cartItems = cartProvider.items.values.toList();
 
@@ -39,11 +38,19 @@ class CartScreen extends StatelessWidget {
                           ),
                           title: Text(item.name),
                           subtitle: Text(
-                              'R\$ ${(item.quantity * item.price).toStringAsFixed(2)}'),
+                              'R\$ ${(item.price * item.quantity).toStringAsFixed(2)}'),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: () {
+                              // Remove o item do carrinho
                               cartProvider.removeItem(item.id);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                      '${item.name} removido do carrinho.'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
                             },
                           ),
                         ),
@@ -76,7 +83,7 @@ class CartScreen extends StatelessWidget {
                                 cartProvider.clearCart();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Pedido finalizado!'),
+                                    content: Text('Carrinho esvaziado!'),
                                   ),
                                 );
                               },
