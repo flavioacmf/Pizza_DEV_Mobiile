@@ -14,10 +14,27 @@ class CartItem {
   });
 }
 
+class Pedido {
+  final String id;
+  final List<CartItem> itens;
+  final double total;
+  String status; // Status do pedido
+
+  Pedido({
+    required this.id,
+    required this.itens,
+    required this.total,
+    this.status = 'Em Produção', // Status inicial
+  });
+}
+
 class CartProvider extends ChangeNotifier {
   final Map<String, CartItem> _items = {};
+  final List<Pedido> _pedidos = []; // Lista de pedidos
 
   Map<String, CartItem> get items => _items;
+
+  List<Pedido> get pedidos => _pedidos;
 
   double get totalAmount {
     return _items.values.fold(
@@ -58,6 +75,20 @@ class CartProvider extends ChangeNotifier {
 
   void clearCart() {
     _items.clear();
+    notifyListeners();
+  }
+
+  void finalizarPedido() {
+    if (_items.isEmpty) return;
+
+    final novoPedido = Pedido(
+      id: DateTime.now().toString(),
+      itens: _items.values.toList(),
+      total: totalAmount + 10.0, // Adiciona taxa de entrega
+    );
+
+    _pedidos.add(novoPedido); // Adiciona o pedido à lista
+    clearCart(); // Esvazia o carrinho
     notifyListeners();
   }
 }
